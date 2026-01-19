@@ -1,22 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Pages Site</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhantomHook – Free Cheat</title>
+
+  <!-- Google Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #121824;
+      --accent: #6cf2c2;
+      --accent2: #5865F2;
+      --text: #e6ebf2;
+      --muted: #9aa4b2;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(1200px 600px at 70% -10%, #162033, transparent), var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ---------------- NAV ---------------- */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,20,0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+
+    .nav a:hover { opacity: 1; }
+
+    /* ---------------- HERO ---------------- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 24px 80px;
+    }
+
+    .hero-grid {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.1;
+      margin: 0 0 16px;
+      animation: slideUp 0.8s ease forwards;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 520px;
+      font-size: 1.05rem;
+      animation: slideUp 1s ease forwards;
+    }
+
+    .buttons {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+      animation: slideUp 1.2s ease forwards;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #4fd6ff);
+      color: #04110c;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    /* ---------------- SCREENSHOT CARD ---------------- */
+    .preview {
+      position: relative;
+      background: linear-gradient(180deg, #0f1624, #0b0f14);
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .preview img {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      opacity: 0.95;
+    }
+
+    .badge {
+      position: absolute;
+      top: -14px;
+      right: 18px;
+      background: var(--accent);
+      color: #04110c;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* ---------------- FEATURES ---------------- */
+    section {
+      padding: 100px 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .feature {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 24px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .feature:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+    }
+
+    .feature .material-icons {
+      font-size: 32px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    /* ---------------- DISCORD ---------------- */
+    .discord {
+      background: linear-gradient(135deg, #5865F2, #4752c4);
+      border-radius: 18px;
+      padding: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .discord h2 { margin: 0 0 8px; }
+
+    .discord a {
+      background: #fff;
+      color: #5865F2;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ---------------- FOOTER ---------------- */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ---------------- ANIMATIONS ---------------- */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My GitHub Pages Site!</h1>
-    </header>
-    <main>
-        <p>This is a basic GitHub Pages site using static HTML and CSS.</p>
-        <p>Edit this text and push your changes to GitHub!</p>
-        <a href="https://github.com">Go to GitHub</a>
-    </main>
-    <footer>
-        <p>&copy; 2026 My GitHub Pages Site</p>
-    </footer>
+
+  <header>
+    <div class="nav">
+      <div class="logo"><span class="material-icons">visibility</span> Phantom<span>Hook</span></div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#discord">Discord</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <h1>PhantomHook<br><span>Free & Powerful</span></h1>
+        <p>A clean, smooth and constantly updated free cheat. Designed for performance, stability, and a modern in-game experience.</p>
+
+        <div class="buttons">
+          <a href="#" class="btn btn-primary"><span class="material-icons">download</span>Download</a>
+          <a href="#discord" class="btn btn-secondary"><span class="material-icons">forum</span>Discord</a>
+        </div>
+      </div>
+
+      <div class="preview">
+        <div class="badge">FREE</div>
+        <!-- Replace src with your real screenshot -->
+        <img src="https://via.placeholder.com/900x550?text=PhantomHook+Menu+Screenshot" alt="PhantomHook Menu" />
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title">Features</h2>
+      <p class="section-sub">Built for smooth gameplay and a clean UI.</p>
+
+      <div class="features">
+        <div class="feature">
+          <span class="material-icons">radar</span>
+          <h3>ESP Tools</h3>
+          <p>Clear visuals with stable rendering and minimal performance impact.</p>
+        </div>
+        <div class="feature">
+          <span class="material-icons">tune</span>
+          <h3>Custom Menu</h3>
+          <p>Modern animated menu with easy toggles and clean layout.</p>
+        </div>
+        <div class="feature">
+          <span class="material-icons">speed</span>
+          <h3>Optimized</h3>
+          <p>Lightweight, fast, and designed to avoid unnecessary crashes.</p>
+        </div>
+        <div class="feature">
+          <span class="material-icons">security</span>
+          <h3>Regular Updates</h3>
+          <p>Bug fixes and improvements released frequently.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="discord">
+    <div class="container">
+      <div class="discord">
+        <div>
+          <h2>Join the PhantomHook Discord</h2>
+          <p>Get updates, support, and talk directly with the community.</p>
+        </div>
+        <!-- Replace with your real Discord invite -->
+        <a href="https://discord.gg/YOURINVITE" target="_blank">
+          <span class="material-icons">discord</span>
+          Join Discord
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 PhantomHook. Free cheat – use at your own risk.</p>
+  </footer>
+
 </body>
 </html>
